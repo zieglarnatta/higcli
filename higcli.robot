@@ -17,7 +17,10 @@ Hello World
     ${go to data directory up by 1 level}=      write     cd ..
     ${go to data directory up by 2 levels}=      write     cd ..
     ${go to data directory}=      write     cd data
-    ${path should exist}=       read command output
+    set client configuration  prompt=#
+    ${output}=         read Until prompt
+    should not contain  ${output}   fail
+    should contain  ${output}   data #
 
 Device.DeviceInfo.X_TMOBILE_MACAddress
     [Tags]  Device.DeviceInfo.X_TMOBILE_MACAddress
@@ -47,6 +50,30 @@ Device.DeviceInfo.UpTime
     [Tags]  Device.DeviceInfo.UpTime
     [Documentation]  Device.DeviceInfo.UpTime
     write   uci_restful -r /restful/sysadm/device_info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.DeviceInfo.ManufaturerOUI
+    [Tags]  Device.DeviceInfo.ManufaturerOUI
+    [Documentation]  Device.DeviceInfo.ManufaturerOUI
+    write   fail no UCI from ASKEY YET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.DeviceInfo.ProductClass
+    [Tags]  Device.DeviceInfo.ProductClass
+    [Documentation]  Device.DeviceInfo.ProductClass
+    write   fail no UCI from ASKEY YET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.DeviceInfo.SerialNumber
+    [Tags]  Device.DeviceInfo.SerialNumber
+    [Documentation]  Device.DeviceInfo.SerialNumber
+    write   fail no UCI from ASKEY YET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
@@ -315,7 +342,370 @@ Device.X_TMOBILE_Cellular.PresentMonthDataUsage
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
 
-Device.X_TMOBILE_Cellular.CGI #to be continued here
+
+Device.X_TMOBILE_Cellular.CGI
+    [Tags]  Device.X_TMOBILE_Cellular.CGI
+    [Documentation]  Device.X_TMOBILE_Cellular.CGI
+    write   uci_restful -r /restful/lte/cellular_info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
+    [Tags]  Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
+    [Documentation]  Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
+    write   fail
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Cellular.Roaming
+    [Tags]  Device.X_TMOBILE_Cellular.Roaming
+    [Documentation]  Device.X_TMOBILE_Cellular.Roaming
+    write   uci_restful -r /restful/lte/serving_nw_info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Cellular.APN
+    [Tags]  Device.X_TMOBILE_Cellular.APN
+    [Documentation]  Device.X_TMOBILE_Cellular.APN
+    write   uci_restful -r /restful/lte/serving_nw_info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Cellular.Status
+    [Tags]  Device.X_TMOBILE_Cellular.Status
+    [Documentation]  Device.X_TMOBILE_Cellular.Status
+    write   uci_restful -r /restful/CMGR/v4_status_info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.RemainingRuntime
+    [Tags]  Device.X_TMOBILE_Battery.RemainingRuntime
+    [Documentation]  Device.X_TMOBILE_Battery.RemainingRuntime
+    write   uci_restful -r /restful/battery/remaining GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.RemainingCapacity
+    [Tags]  Device.X_TMOBILE_Battery.RemainingCapacity
+    [Documentation]  Device.X_TMOBILE_Battery.RemainingCapacity
+    write   uci_restful -r /restful/battery/remaining GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.FullChargerCapacity
+    [Tags]  Device.X_TMOBILE_Battery.FullChargerCapacity
+    [Documentation]  Device.X_TMOBILE_Battery.FullChargerCapacity
+    write   uci_restful -r /restful/battery/capacity GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.DesignCapacity
+    [Tags]  Device.X_TMOBILE_Battery.DesignCapacity
+    [Documentation]  Device.X_TMOBILE_Battery.DesignCapacity
+    write   uci_restful -r /restful/battery/capacity GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.CycleCount
+    [Tags]  Device.X_TMOBILE_Battery.CycleCount
+    [Documentation]  Device.X_TMOBILE_Battery.CycleCount
+    write   uci_restful -r /restful/battery/status GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.NeedReplacement
+    [Tags]  Device.X_TMOBILE_Battery.NeedReplacement
+    [Documentation]  Device.X_TMOBILE_Battery.NeedReplacement
+    write   uci_restful -r /restful/battery/status GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.ChargingCurrent
+    [Tags]  Device.X_TMOBILE_Battery.ChargingCurrent
+    [Documentation]  Device.X_TMOBILE_Battery.ChargingCurrent
+    write   uci_restful -r /restful/battery/output GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.Temperature
+    [Tags]  Device.X_TMOBILE_Battery.Temperature
+    [Documentation]  Device.X_TMOBILE_Battery.Temperature
+    write   uci_restful -r /restful/battery/output GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.Current
+    [Tags]  Device.X_TMOBILE_Battery.Current
+    [Documentation]  Device.X_TMOBILE_Battery.Current
+    write   uci_restful -r /restful/battery/output GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.Voltage
+    [Tags]  Device.X_TMOBILE_Battery.Voltage
+    [Documentation]  Device.X_TMOBILE_Battery.Voltage
+    write   uci_restful -r /restful/battery/output GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.Level
+    [Tags]  Device.X_TMOBILE_Battery.Level
+    [Documentation]  Device.X_TMOBILE_Battery.Level
+    write   uci_restful -r /restful/battery/output GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.InCharging
+    [Tags]  Device.X_TMOBILE_Battery.InCharging
+    [Documentation]  Device.X_TMOBILE_Battery.InCharging
+    write   uci_restful -r /restful/battery/output GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.X_TMOBILE_Battery.ConnectStatus
+    [Tags]  Device.X_TMOBILE_Battery.ConnectStatus
+    [Documentation]  Device.X_TMOBILE_Battery.ConnectStatus
+    write   uci_restful -r /restful/battery/status GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.PhysAddress
+    [Tags]  Device.Hosts.Host.x.PhysAddress
+    [Documentation]  Device.Hosts.Host.x.PhysAddress
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.IPAddress
+    [Tags]  Device.Hosts.Host.x.IPAddress
+    [Documentation]  Device.Hosts.Host.x.IPAddress
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.HostName
+    [Tags]  Device.Hosts.Host.x.HostName
+    [Documentation]  Device.Hosts.Host.x.HostName
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.Active
+    [Tags]  Device.Hosts.Host.x.Active
+    [Documentation]  Device.Hosts.Host.x.Active
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.X_TMOBILE_DailyUsage_UL
+    [Tags]  Device.Hosts.Host.x.X_TMOBILE_DailyUsage_UL
+    [Documentation]  Device.Hosts.Host.x.X_TMOBILE_DailyUsage_UL
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.X_TMOBILE_DailyUsage_DL
+    [Tags]  Device.Hosts.Host.x.X_TMOBILE_DailyUsage_DL
+    [Documentation]  Device.Hosts.Host.x.X_TMOBILE_DailyUsage_DL
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_UL
+    [Tags]  Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_UL
+    [Documentation]  Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_UL
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_DL
+    [Tags]  Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_DL
+    [Documentation]  Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_DL
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.X_TMOBILE_connectionType
+    [Tags]  Device.Hosts.Host.x.X_TMOBILE_connectionType
+    [Documentation]  Device.Hosts.Host.x.X_TMOBILE_connectionType
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.X_TMOBILE_WiFi_SSID
+    [Tags]  Device.Hosts.Host.x.X_TMOBILE_WiFi_SSID
+    [Documentation]  Device.Hosts.Host.x.X_TMOBILE_WiFi_SSID
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.X_TMOBILE_WiFi_Security
+    [Tags]  Device.Hosts.Host.x.X_TMOBILE_WiFi_Security
+    [Documentation]  Device.Hosts.Host.x.X_TMOBILE_WiFi_Security
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.X_TMOBILE_WiFi_Version
+    [Tags]  Device.Hosts.Host.x.X_TMOBILE_WiFi_Version
+    [Documentation]  Device.Hosts.Host.x.X_TMOBILE_WiFi_Versio
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.X_TMOBILE_WiFi_Encryption
+    [Tags]  Device.Hosts.Host.x.X_TMOBILE_WiFi_Encryption
+    [Documentation]  Device.Hosts.Host.x.X_TMOBILE_WiFi_Encryption
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.Host.x.X_TMOBILE_Last_Connection_Error
+    [Tags]  Device.Hosts.Host.x.X_TMOBILE_Last_Connection_Error
+    [Documentation]  Device.Hosts.Host.x.X_TMOBILE_Last_Connection_Error
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.Hosts.HostNumberOfEntries
+    [Tags]  Device.Hosts.HostNumberOfEntries
+    [Documentation]  Device.Hosts.HostNumberOfEntries
+    write   uci_restful -r /restful/hosttable/info GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+
+Device.MQTT.Client.{i}.Subscription.{i}.Topic
+    [Tags]      Device.MQTT.Client.{i}.Subscription.{i}.Topic
+    [Documentation]      Device.MQTT.Client.{i}.Subscription.{i}.Topic
+    write   uci_restful -r /restful/mqttclient/client GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt    loglevel=WARN
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.MQTT.Client.{i}.Subscription.{i}.QoS
+    [Tags]      Device.MQTT.Client.{i}.Subscription.{i}.QoS
+    [Documentation]      Device.MQTT.Client.{i}.Subscription.{i}.QoS
+    write   uci_restful -r /restful/mqttclient/client GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt    loglevel=WARN
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.MQTT.Client.{i}.Subscription.{i}.Enable
+    [Tags]      Device.MQTT.Client.{i}.Subscription.{i}.Enable
+    [Documentation]      Device.MQTT.Client.{i}.Subscription.{i}.Enable
+    write   uci_restful -r /restful/mqttclient/client GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt    loglevel=WARN
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Topic
+    [Tags]      Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Topic
+    [Documentation]      Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Topic
+    write   uci_restful -r /restful/mqttclient/client GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt    loglevel=WARN
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Reference
+    [Tags]      Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Reference
+    [Documentation]      Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Reference
+    write   uci_restful -r /restful/mqttclient/client GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt    loglevel=WARN
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.MQTT.Client.{i}.Username
+    [Tags]          Device.MQTT.Client.{i}.Username
+    [Documentation]          Device.MQTT.Client.{i}.Username
+    write   uci_restful -r /restful/mqttclient/client GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt    loglevel=WARN
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.MQTT.Client.{i}.Password
+    [Tags]          Device.MQTT.Client.{i}.Password
+    [Documentation]          Device.MQTT.Client.{i}.Password
+    write   uci_restful -r /restful/mqttclient/client GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt    loglevel=WARN
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.MQTT.Client.{i}.ClientID
+    [Tags]          Device.MQTT.Client.{i}.ClientID
+    [Documentation]          Device.MQTT.Client.{i}.ClientID
+    write   uci_restful -r /restful/mqttclient/client GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt    loglevel=WARN
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.MQTT.Client.{i}.BrokerAddress
+    [Tags]          Device.MQTT.Client.{i}.BrokerAddress
+    [Documentation]          Device.MQTT.Client.{i}.BrokerAddress
+    write   uci_restful -r /restful/mqttclient/client GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt    loglevel=WARN
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.MQTT.Client.{i}.BrokerPort
+    [Tags]          Device.MQTT.Client.{i}.BrokerPort
+    [Documentation]          Device.MQTT.Client.{i}.BrokerPort
+    write   uci_restful -r /restful/mqttclient/client GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt    loglevel=WARN
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.MQTT.Client.{i}.Enable
+    [Tags]          Device.MQTT.Client.{i}.Enable
+    [Documentation]          Device.MQTT.Client.{i}.Enable
+    write   uci_restful -r /restful/mqttclient/client GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt    loglevel=WARN
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
 
 uci
     [Tags]  uci
@@ -324,6 +714,7 @@ uci
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
+    should not contain  ${output}   no content
 
 
 
