@@ -175,8 +175,8 @@ Device.X_TMOBILE_Cellular.CellTower.1.RSSI
     should not contain  ${output}   fail
 
 Device.X_TMOBILE_Cellular.CellTower.1.RSRQ
-    [Tags]  Device.X_TMOBILE_Cellular.CellTower.1.RSSI
-    [Documentation]  Device.X_TMOBILE_Cellular.CellTower.1.RSSI
+    [Tags]  Device.X_TMOBILE_Cellular.CellTower.1.RSRQ
+    [Documentation]  Device.X_TMOBILE_Cellular.CellTower.1.RSRQ
     write   uci_restful -r /restful/lte/cellular_info_ex GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
