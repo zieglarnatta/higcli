@@ -707,6 +707,42 @@ Device.MQTT.Client.{i}.Enable
     should not contain  ${output}   fail
     #should not contain  ${output}   no content
 
+Device.WiFi.xxx.SSID
+    [Tags]          Device.WiFi.xxx.SSID
+    [Documentation]          Device.WiFi.xxx.SSID
+    write   uci_restful -r /restful/wifiap/ssid GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.WiFi.xxx.Security
+    [Tags]          Device.WiFi.xxx.Security
+    [Documentation]          Device.WiFi.xxx.Security
+    write   uci_restful -r /restful/wifiap/security GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.WiFi.xxx.Version
+    [Tags]          Device.WiFi.xxx.Version
+    [Documentation]          Device.WiFi.xxx.Version
+    write   uci_restful -r /restful/wifiap/version GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
+Device.WiFi.xxx.Encryption
+    [Tags]          Device.WiFi.xxx.Encryption
+    [Documentation]          Device.WiFi.xxx.Encryption
+    write   uci_restful -r /restful/wifiap/encryption GET
+    Set client configuration  prompt=#
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail
+    #should not contain  ${output}   no content
+
 
 uci
     [Tags]  uci
