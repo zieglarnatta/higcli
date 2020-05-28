@@ -25,7 +25,7 @@ Hello World
 Device.DeviceInfo.X_TMOBILE_MACAddress
     [Tags]  Device.DeviceInfo.X_TMOBILE_MACAddress
     [Documentation]  Device.DeviceInfo.X_TMOBILE_MACAddress
-    write       uci_restful -r /restful/sysadm/device_info GET
+    write       uci_restful -r /restful/tr069/dev_info GET
     set client configuration  prompt=#
     ${output}=         read Until prompt
     should not contain  ${output}   fail
@@ -49,7 +49,8 @@ Device.DeviceInfo.X_TMOBILE_IMEI
 Device.DeviceInfo.UpTime
     [Tags]  Device.DeviceInfo.UpTime
     [Documentation]  Device.DeviceInfo.UpTime
-    write   uci_restful -r /restful/sysadm/device_info GET
+    write   uci_restful -r /restful/tr069/dev_info GET
+    #write   uci_restful -r /restful/sysadm/device_info GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
@@ -57,7 +58,7 @@ Device.DeviceInfo.UpTime
 Device.DeviceInfo.ManufaturerOUI
     [Tags]  Device.DeviceInfo.ManufaturerOUI
     [Documentation]  Device.DeviceInfo.ManufaturerOUI
-    write   fail no UCI from ASKEY YET
+    write   uci_restful -r /restful/tr069/dev_info GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
@@ -65,7 +66,7 @@ Device.DeviceInfo.ManufaturerOUI
 Device.DeviceInfo.ProductClass
     [Tags]  Device.DeviceInfo.ProductClass
     [Documentation]  Device.DeviceInfo.ProductClass
-    write   fail no UCI from ASKEY YET
+    write   uci_restful -r /restful/tr069/dev_info GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
@@ -73,7 +74,7 @@ Device.DeviceInfo.ProductClass
 Device.DeviceInfo.SerialNumber
     [Tags]  Device.DeviceInfo.SerialNumber
     [Documentation]  Device.DeviceInfo.SerialNumber
-    write   fail no UCI from ASKEY YET
+    write   uci_restful -r /restful/tr069/dev_info GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
@@ -81,7 +82,7 @@ Device.DeviceInfo.SerialNumber
 Device.X_TMOBILE_DataUsage.Cellular.Day.1.Date
     [Tags]  Device.X_TMOBILE_DataUsage.Cellular.Day.1.Date
     [Documentation]  Device.X_TMOBILE_DataUsage.Cellular.Day.1.Date
-    write   uci_restful -r /restful/traffic/daily GET
+    write   uci_restful -r /restful/traffic/daily/0 GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
@@ -89,7 +90,7 @@ Device.X_TMOBILE_DataUsage.Cellular.Day.1.Date
 Device.X_TMOBILE_DataUsage.Cellular.Day.1.Received
     [Tags]  Device.X_TMOBILE_DataUsage.Cellular.Day.1.Received
     [Documentation]  Device.X_TMOBILE_DataUsage.Cellular.Day.1.Received
-    write   uci_restful -r /restful/traffic/daily GET
+    write   uci_restful -r /restful/traffic/daily/0 GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
@@ -97,7 +98,7 @@ Device.X_TMOBILE_DataUsage.Cellular.Day.1.Received
 Device.X_TMOBILE_DataUsage.Cellular.Day.1.Sent
     [Tags]  Device.X_TMOBILE_DataUsage.Cellular.Day.1.Sent
     [Documentation]  Device.X_TMOBILE_DataUsage.Cellular.Day.1.Sent
-    write   uci_restful -r /restful/traffic/daily GET
+    write   uci_restful -r /restful/traffic/daily/0 GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
@@ -105,7 +106,7 @@ Device.X_TMOBILE_DataUsage.Cellular.Day.1.Sent
 Device.X_TMOBILE_DataUsage.Cellular.Day.1.TotalTransmit
     [Tags]  Device.X_TMOBILE_DataUsage.Cellular.Day.1.TotalTransmit
     [Documentation]  Device.X_TMOBILE_DataUsage.Cellular.Day.1.TotalTransmit
-    write   uci_restful -r /restful/traffic/daily GET
+    write   uci_restful -r /restful/traffic/daily/0 GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
@@ -354,7 +355,7 @@ Device.X_TMOBILE_Cellular.CGI
 Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
     [Tags]  Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
     [Documentation]  Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
-    write   fail
+    write   fail not ready / no UCI yet
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
@@ -378,7 +379,7 @@ Device.X_TMOBILE_Cellular.APN
 Device.X_TMOBILE_Cellular.Status
     [Tags]  Device.X_TMOBILE_Cellular.Status
     [Documentation]  Device.X_TMOBILE_Cellular.Status
-    write   uci_restful -r /restful/CMGR/v4_status_info GET
+    write   uci_restful -r /restful/tr069/dev_info GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
