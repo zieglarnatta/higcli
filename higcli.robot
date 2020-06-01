@@ -352,13 +352,13 @@ Device.X_TMOBILE_Cellular.CGI
     ${output}=         Read Until prompt
     should not contain  ${output}   fail
 
-Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
-    [Tags]  Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
-    [Documentation]  Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
-    write   fail not ready / no UCI yet
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail
+#Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
+#    [Tags]  Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
+#    [Documentation]  Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
+#    write   fail not ready / no UCI yet
+#    Set client configuration  prompt=#
+#    ${output}=         Read Until prompt
+#    should not contain  ${output}   fail
 
 Device.X_TMOBILE_Cellular.Roaming
     [Tags]  Device.X_TMOBILE_Cellular.Roaming
