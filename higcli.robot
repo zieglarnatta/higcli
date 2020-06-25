@@ -747,6 +747,7 @@ Update LTE Cellular Interval Info
     [Tags]                  cellular_info_update_interval
     [Documentation]          cellular_info_update_interval
     write                   uci_restful -r /restful/lte/cellular_info_update_interval GET
+    #write                   uci_restful -r /restful/lte/cellular_info_update_interval PUT "{\"second\":\"1\"}"
 
 uci
     [Tags]  uci
