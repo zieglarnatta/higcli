@@ -613,8 +613,8 @@ Device.MQTT.Client.{i}.Subscription.{i}.Topic
     [Documentation]      Device.MQTT.Client.{i}.Subscription.{i}.Topic
     write                uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt    loglevel=WARN
-    should not contain  ${output}   fail    uci_restful: not found
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
 Device.MQTT.Client.{i}.Subscription.{i}.QoS
@@ -622,8 +622,8 @@ Device.MQTT.Client.{i}.Subscription.{i}.QoS
     [Documentation]      Device.MQTT.Client.{i}.Subscription.{i}.QoS
     write               uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt    loglevel=WARN
-    should not contain  ${output}   fail    uci_restful: not found
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail    uci_restful: not found   "no content"
     #should not contain  ${output}   no content
 
 Device.MQTT.Client.{i}.Subscription.{i}.Enable
@@ -631,8 +631,8 @@ Device.MQTT.Client.{i}.Subscription.{i}.Enable
     [Documentation]      Device.MQTT.Client.{i}.Subscription.{i}.Enable
     write               uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt    loglevel=WARN
-    should not contain  ${output}   fail    uci_restful: not found
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
 Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Topic
@@ -640,8 +640,8 @@ Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Topic
     [Documentation]      Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Topic
     write                 uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt    loglevel=WARN
-    should not contain  ${output}   fail    uci_restful: not found
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
 Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Reference
@@ -649,8 +649,8 @@ Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Reference
     [Documentation]      Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Reference
     write               uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt    loglevel=WARN
-    should not contain  ${output}   fail    uci_restful: not found
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
 Device.MQTT.Client.{i}.Username
@@ -658,8 +658,8 @@ Device.MQTT.Client.{i}.Username
     [Documentation]          Device.MQTT.Client.{i}.Username
     write                   uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt    loglevel=WARN
-    should not contain  ${output}   fail    uci_restful: not found
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
 Device.MQTT.Client.{i}.Password
@@ -667,8 +667,8 @@ Device.MQTT.Client.{i}.Password
     [Documentation]          Device.MQTT.Client.{i}.Password
     write                   uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt    loglevel=WARN
-    should not contain  ${output}   fail    uci_restful: not found
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
 Device.MQTT.Client.{i}.ClientID
@@ -676,8 +676,8 @@ Device.MQTT.Client.{i}.ClientID
     [Documentation]          Device.MQTT.Client.{i}.ClientID
     write                   uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt    loglevel=WARN
-    should not contain  ${output}   fail    uci_restful: not found
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
 Device.MQTT.Client.{i}.BrokerAddress
@@ -685,8 +685,8 @@ Device.MQTT.Client.{i}.BrokerAddress
     [Documentation]          Device.MQTT.Client.{i}.BrokerAddress
     write                   uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt    loglevel=WARN
-    should not contain  ${output}   fail    uci_restful: not found
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
 Device.MQTT.Client.{i}.BrokerPort
@@ -694,8 +694,8 @@ Device.MQTT.Client.{i}.BrokerPort
     [Documentation]          Device.MQTT.Client.{i}.BrokerPort
     write                   uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt    loglevel=WARN
-    should not contain  ${output}   fail    uci_restful: not found
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
 Device.MQTT.Client.{i}.Enable
@@ -703,8 +703,8 @@ Device.MQTT.Client.{i}.Enable
     [Documentation]          Device.MQTT.Client.{i}.Enable
     write                   uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt    loglevel=WARN
-    should not contain  ${output}   fail    uci_restful: not found
+    ${output}=         Read Until prompt
+    should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
 Device.WiFi.xxx.SSID
