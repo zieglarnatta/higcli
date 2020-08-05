@@ -35,14 +35,6 @@ uci_restful -r /restful/tr069/dev_info GET
     ${output}=         read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-uci_restful -r /restful/tr069/dev_info GET (continued)
-    [Tags]              Device.X_TMOBILE_Cellular.Status
-    [Documentation]     Device.X_TMOBILE_Cellular.Status
-    write               uci_restful -r /restful/tr069/dev_info GET
-    set client configuration  prompt=#
-    ${output}=         read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
 uci_restful -r /restful/geoip/globalIP GET
     [Tags]              Device.DeviceInfo.X_TMOBILE_GlobalIPAddress
     [Documentation]     Device.DeviceInfo.X_TMOBILE_GlobalIPAddress
