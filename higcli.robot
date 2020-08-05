@@ -22,15 +22,28 @@ Hello World
     should not contain  ${output}   fail    uci_restful: not found
     should contain  ${output}   data #
 
-Device.DeviceInfo.X_TMOBILE_MACAddress
-    [Tags]              Device.DeviceInfo.X_TMOBILE_MACAddress
-    [Documentation]     Device.DeviceInfo.X_TMOBILE_MACAddress
+uci_restful -r /restful/tr069/dev_info GET
+    [Tags]              Device.DeviceInfo.X_TMOBILE_MACAddress  Device.DeviceInfo.UpTime
+    ...                 Device.DeviceInfo.ManufaturerOUI        Device.DeviceInfo.ProductClass
+    ...                 Device.DeviceInfo.SerialNumber          Device.X_TMOBILE_Cellular.Status
+    #max is 6 tags so continue on next test case
+    [Documentation]     Device.DeviceInfo.X_TMOBILE_MACAddress  Device.DeviceInfo.UpTime
+    ...                 Device.DeviceInfo.ManufaturerOUI        Device.DeviceInfo.ProductClass
+    ...                 Device.DeviceInfo.SerialNumber          Device.X_TMOBILE_Cellular.Status
     write               uci_restful -r /restful/tr069/dev_info GET
     set client configuration  prompt=#
     ${output}=         read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.DeviceInfo.X_TMOBILE_GlobalIPAddress
+uci_restful -r /restful/tr069/dev_info GET (continued)
+    [Tags]              Device.X_TMOBILE_Cellular.Status
+    [Documentation]     Device.X_TMOBILE_Cellular.Status
+    write               uci_restful -r /restful/tr069/dev_info GET
+    set client configuration  prompt=#
+    ${output}=         read Until prompt
+    should not contain  ${output}   fail    uci_restful: not found
+
+uci_restful -r /restful/geoip/globalIP GET
     [Tags]              Device.DeviceInfo.X_TMOBILE_GlobalIPAddress
     [Documentation]     Device.DeviceInfo.X_TMOBILE_GlobalIPAddress
     write               uci_restful -r /restful/geoip/globalIP GET
@@ -38,280 +51,87 @@ Device.DeviceInfo.X_TMOBILE_GlobalIPAddress
     ${output}=         read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.DeviceInfo.X_TMOBILE_IMEI
-    [Tags]              Device.DeviceInfo.X_TMOBILE_IMEI
-    [Documentation]     Device.DeviceInfo.X_TMOBILE_IMEI
+uci_restful -r /restful/lte/device_info GET
+    [Tags]              Device.DeviceInfo.X_TMOBILE_IMEI    Device.X_TMOBILE_ISIM.IMSI
+    ...                 Device.X_TMOBILE_ISIM.SIMStatus     Device.X_TMOBILE_Voice.MSISDN
+    [Documentation]     Device.DeviceInfo.X_TMOBILE_IMEI    Device.X_TMOBILE_ISIM.IMSI
+    ...                 Device.X_TMOBILE_ISIM.SIMStatus     Device.X_TMOBILE_Voice.MSISDN
     write               uci_restful -r /restful/lte/device_info GET
     set client configuration  prompt=#
     ${output}=         read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.DeviceInfo.UpTime
-    [Tags]              Device.DeviceInfo.UpTime
-    [Documentation]     Device.DeviceInfo.UpTime
-    write               uci_restful -r /restful/tr069/dev_info GET
-    #write   uci_restful -r /restful/sysadm/device_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.DeviceInfo.ManufaturerOUI
-    [Tags]              Device.DeviceInfo.ManufaturerOUI
-    [Documentation]     Device.DeviceInfo.ManufaturerOUI
-    write               uci_restful -r /restful/tr069/dev_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.DeviceInfo.ProductClass
-    [Tags]              Device.DeviceInfo.ProductClass
-    [Documentation]     Device.DeviceInfo.ProductClass
-    write               uci_restful -r /restful/tr069/dev_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.DeviceInfo.SerialNumber
-    [Tags]              Device.DeviceInfo.SerialNumber
-    [Documentation]     Device.DeviceInfo.SerialNumber
-    write               uci_restful -r /restful/tr069/dev_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_DataUsage.Cellular.Day.1.Date
-    [Tags]              Device.X_TMOBILE_DataUsage.Cellular.Day.1.Date
-    [Documentation]     Device.X_TMOBILE_DataUsage.Cellular.Day.1.Date
+uci_restful -r /restful/traffic/daily/0 GET
+    [Tags]              Device.X_TMOBILE_DataUsage.Cellular.Day.1.Date    Device.X_TMOBILE_DataUsage.Cellular.Day.1.Received
+    ...                 Device.X_TMOBILE_DataUsage.Cellular.Day.1.Sent    Device.X_TMOBILE_DataUsage.Cellular.Day.1.TotalTransmit
+    [Documentation]     Device.X_TMOBILE_DataUsage.Cellular.Day.1.Date    Device.X_TMOBILE_DataUsage.Cellular.Day.1.Received
+    ...                 Device.X_TMOBILE_DataUsage.Cellular.Day.1.Sent    Device.X_TMOBILE_DataUsage.Cellular.Day.1.TotalTransmit
     write               uci_restful -r /restful/traffic/daily/0 GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_DataUsage.Cellular.Day.1.Received
-    [Tags]              Device.X_TMOBILE_DataUsage.Cellular.Day.1.Received
-    [Documentation]     Device.X_TMOBILE_DataUsage.Cellular.Day.1.Received
-    write               uci_restful -r /restful/traffic/daily/0 GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_DataUsage.Cellular.Day.1.Sent
-    [Tags]              Device.X_TMOBILE_DataUsage.Cellular.Day.1.Sent
-    [Documentation]     Device.X_TMOBILE_DataUsage.Cellular.Day.1.Sent
-    write               uci_restful -r /restful/traffic/daily/0 GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_DataUsage.Cellular.Day.1.TotalTransmit
-    [Tags]              Device.X_TMOBILE_DataUsage.Cellular.Day.1.TotalTransmit
-    [Documentation]     Device.X_TMOBILE_DataUsage.Cellular.Day.1.TotalTransmit
-    write               uci_restful -r /restful/traffic/daily/0 GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_ISIM.IMSI
-    [Tags]              Device.X_TMOBILE_ISIM.IMSI
-    [Documentation]     Device.X_TMOBILE_ISIM.IMSI
-    write               uci_restful -r /restful/lte/device_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_ISIM.SIMStatus
-    [Tags]              Device.X_TMOBILE_ISIM.SIMStatus
-    [Documentation]     Device.X_TMOBILE_ISIM.SIMStatus
-    write               uci_restful -r /restful/lte/device_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Voice.MSISDN
-    [Tags]              Device.X_TMOBILE_Voice.MSISDN
-    [Documentation]     Device.X_TMOBILE_Voice.MSISDN
-    write               uci_restful -r /restful/lte/device_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.MCC
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.MCC
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.MCC
+uci_restful -r /restful/lte/cellular_info GET
+    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.MCC    Device.X_TMOBILE_Cellular.CellTower.1.MNC
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.LAC    Device.X_TMOBILE_Cellular.CellTower.1.TAC
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.eNB    Device.X_TMOBILE_Cellular.CellTower.1.CQI
+    #continued, 6 tags max
+    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.MCC    Device.X_TMOBILE_Cellular.CellTower.1.MNC
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.LAC    Device.X_TMOBILE_Cellular.CellTower.1.TAC
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.eNB    Device.X_TMOBILE_Cellular.CellTower.1.CQI
     write               uci_restful -r /restful/lte/cellular_info GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_Cellular.CellTower.1.MNC
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.MNC
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.MNC
+uci_restful -r /restful/lte/cellular_info GET (continued part 1)
+    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.ServingTime    Device.X_TMOBILE_Cellular.CellTower.1.UL
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.DL    Device.X_TMOBILE_Cellular.CellTower.1.CA_State
+    ...                 Device.X_TMOBILE_Cellular.CellTowerNumberOfEntries    Device.X_TMOBILE_Cellular.ConnectedCellTower
+    #continued, 6 tags max
+    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.ServingTime    Device.X_TMOBILE_Cellular.CellTower.1.UL
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.DL    Device.X_TMOBILE_Cellular.CellTower.1.CA_State
+    ...                 Device.X_TMOBILE_Cellular.CellTowerNumberOfEntries    Device.X_TMOBILE_Cellular.ConnectedCellTower
     write               uci_restful -r /restful/lte/cellular_info GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_Cellular.CellTower.1.LAC
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.LAC
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.LAC
+uci_restful -r /restful/lte/cellular_info GET (continued part 2)
+    [Tags]              Device.X_TMOBILE_Cellular.CGI
+    [Documentation]     Device.X_TMOBILE_Cellular.CGI
     write               uci_restful -r /restful/lte/cellular_info GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_Cellular.CellTower.1.CID
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.CID
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.CID
+uci_restful -r /restful/lte/cellular_info_ex GET
+    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.CID    Device.X_TMOBILE_Cellular.CellTower.1.RSSI
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.RSRQ    Device.X_TMOBILE_Cellular.CellTower.1.RSRP
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.SNR    Device.X_TMOBILE_Cellular.CellTower.1.Srxlev
+    #continued, 6 tags max
+    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.CID    Device.X_TMOBILE_Cellular.CellTower.1.RSSI
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.RSRQ    Device.X_TMOBILE_Cellular.CellTower.1.RSRP
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.SNR    Device.X_TMOBILE_Cellular.CellTower.1.Srxlev
     write               uci_restful -r /restful/lte/cellular_info_ex GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_Cellular.CellTower.1.RSSI
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.RSSI
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.RSSI
+uci_restful -r /restful/lte/cellular_info_ex GET (continued part 1)
+    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.Band         Device.X_TMOBILE_Cellular.CellTower.1.Bandwidth
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.RxChannel    Device.X_TMOBILE_Cellular.CellTower.1.TxChannel
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.Scell_Band   Device.X_TMOBILE_Cellular.CellTower.1.Scell_Bandwidth
+    #continued, 6 tags max
+    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.Srxlev         Device.X_TMOBILE_Cellular.CellTower.1.Bandwidth
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.RxChannel    Device.X_TMOBILE_Cellular.CellTower.1.TxChannel
+    ...                 Device.X_TMOBILE_Cellular.CellTower.1.Scell_Band   Device.X_TMOBILE_Cellular.CellTower.1.Scell_Bandwidth
     write               uci_restful -r /restful/lte/cellular_info_ex GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_Cellular.CellTower.1.RSRQ
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.RSRQ
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.RSRQ
-    write               uci_restful -r /restful/lte/cellular_info_ex GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.RSRP
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.RSRP
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.RSRP
-    write               uci_restful -r /restful/lte/cellular_info_ex GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.SNR
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.SNR
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.SNR
-    write               uci_restful -r /restful/lte/cellular_info_ex GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.Srxlev
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.Srxlev
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.Srxlev
-    write               uci_restful -r /restful/lte/cellular_info_ex GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.Band
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.Band
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.Band
-    write               uci_restful -r /restful/lte/cellular_info_ex GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.Bandwidth
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.Bandwidth
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.Bandwidth
-    write               uci_restful -r /restful/lte/cellular_info_ex GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.RxChannel
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.RxChannel
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.RxChannel
-    write               uci_restful -r /restful/lte/cellular_info_ex GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.TxChannel
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.TxChannel
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.TxChannel
-    write               uci_restful -r /restful/lte/cellular_info_ex GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.TAC
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.TAC
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.TAC
-    write               uci_restful -r /restful/lte/cellular_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.eNB
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.eNB
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.eNB
-    write               uci_restful -r /restful/lte/cellular_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.CQI
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.CQI
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.CQI
-    write               uci_restful -r /restful/lte/cellular_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.ServingTime
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.ServingTime
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.ServingTime
-    write               uci_restful -r /restful/lte/cellular_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.UL
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.UL
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.UL
-    write               uci_restful -r /restful/lte/cellular_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.DL
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.DL
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.DL
-    write               uci_restful -r /restful/lte/cellular_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.CA_State
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.CA_State
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.CA_State
-    write               uci_restful -r /restful/lte/cellular_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.Scell_Band
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.Scell_Band
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.Scell_Band
-    write               uci_restful -r /restful/lte/cellular_info_ex GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.Scell_Bandwidth
-    [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.Scell_Bandwidth
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.Scell_Bandwidth
-    write               uci_restful -r /restful/lte/cellular_info_ex GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.CellTower.1.Scell_Channel
+uci_restful -r /restful/lte/cellular_info_ex GET (continued part 2)
     [Tags]              Device.X_TMOBILE_Cellular.CellTower.1.Scell_Channel
     [Documentation]     Device.X_TMOBILE_Cellular.CellTower.1.Scell_Channel
     write               uci_restful -r /restful/lte/cellular_info_ex GET
@@ -319,23 +139,7 @@ Device.X_TMOBILE_Cellular.CellTower.1.Scell_Channel
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_Cellular.CellTowerNumberOfEntries
-    [Tags]              Device.X_TMOBILE_Cellular.CellTowerNumberOfEntries
-    [Documentation]     Device.X_TMOBILE_Cellular.CellTowerNumberOfEntries
-    write               uci_restful -r /restful/lte/cellular_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.ConnectedCellTower
-    [Tags]              Device.X_TMOBILE_Cellular.ConnectedCellTower
-    [Documentation]     Device.X_TMOBILE_Cellular.ConnectedCellTower
-    write               uci_restful -r /restful/lte/cellular_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.PresentMonthDataUsage
+uci_restful -r /restful/traffic/monthly GET
     [Tags]              Device.X_TMOBILE_Cellular.PresentMonthDataUsage
     [Documentation]     Device.X_TMOBILE_Cellular.PresentMonthDataUsage
     write               uci_restful -r /restful/traffic/monthly GET
@@ -343,14 +147,6 @@ Device.X_TMOBILE_Cellular.PresentMonthDataUsage
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-
-Device.X_TMOBILE_Cellular.CGI
-    [Tags]              Device.X_TMOBILE_Cellular.CGI
-    [Documentation]     Device.X_TMOBILE_Cellular.CGI
-    write               uci_restful -r /restful/lte/cellular_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
 
 #Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
 #    [Tags]  Device.X_TMOBILE_Cellular.MonthlyDataUsageQuota
@@ -360,390 +156,161 @@ Device.X_TMOBILE_Cellular.CGI
 #    ${output}=         Read Until prompt
 #    should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_Cellular.Roaming
-    [Tags]              Device.X_TMOBILE_Cellular.Roaming
-    [Documentation]     Device.X_TMOBILE_Cellular.Roaming
+uci_restful -r /restful/lte/serving_nw_info GET
+    [Tags]              Device.X_TMOBILE_Cellular.Roaming   Device.X_TMOBILE_Cellular.APN
+    [Documentation]     Device.X_TMOBILE_Cellular.Roaming   Device.X_TMOBILE_Cellular.APN
     write               uci_restful -r /restful/lte/serving_nw_info GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_Cellular.APN
-    [Tags]              Device.X_TMOBILE_Cellular.APN
-    [Documentation]     Device.X_TMOBILE_Cellular.APN
-    write               uci_restful -r /restful/lte/serving_nw_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Cellular.Status
-    [Tags]              Device.X_TMOBILE_Cellular.Status
-    [Documentation]     Device.X_TMOBILE_Cellular.Status
-    write               uci_restful -r /restful/tr069/dev_info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Battery.RemainingRuntime
-    [Tags]              Device.X_TMOBILE_Battery.RemainingRuntime
-    [Documentation]     Device.X_TMOBILE_Battery.RemainingRuntime
+uci_restful -r /restful/battery/remaining GET
+    [Tags]              Device.X_TMOBILE_Battery.RemainingRuntime    Device.X_TMOBILE_Battery.RemainingCapacity
+    [Documentation]     Device.X_TMOBILE_Battery.RemainingRuntime    Device.X_TMOBILE_Battery.RemainingCapacity
     write               uci_restful -r /restful/battery/remaining GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_Battery.RemainingCapacity
-    [Tags]              Device.X_TMOBILE_Battery.RemainingCapacity
-    [Documentation]     Device.X_TMOBILE_Battery.RemainingCapacity
-    write               uci_restful -r /restful/battery/remaining GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Battery.FullChargerCapacity
-    [Tags]              Device.X_TMOBILE_Battery.FullChargerCapacity
-    [Documentation]     Device.X_TMOBILE_Battery.FullChargerCapacity
+uci_restful -r /restful/battery/capacity GET
+    [Tags]              Device.X_TMOBILE_Battery.FullChargerCapacity    Device.X_TMOBILE_Battery.DesignCapacity
+    [Documentation]     Device.X_TMOBILE_Battery.FullChargerCapacity    Device.X_TMOBILE_Battery.DesignCapacity
     write               uci_restful -r /restful/battery/capacity GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_Battery.DesignCapacity
-    [Tags]              Device.X_TMOBILE_Battery.DesignCapacity
-    [Documentation]     Device.X_TMOBILE_Battery.DesignCapacity
-    write               uci_restful -r /restful/battery/capacity GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Battery.CycleCount
-    [Tags]              Device.X_TMOBILE_Battery.CycleCount
-    [Documentation]     Device.X_TMOBILE_Battery.CycleCount
+uci_restful -r /restful/battery/status GET
+    [Tags]              Device.X_TMOBILE_Battery.CycleCount    Device.X_TMOBILE_Battery.NeedReplacement
+    ...                 Device.X_TMOBILE_Battery.ConnectStatus
+    [Documentation]     Device.X_TMOBILE_Battery.CycleCount    Device.X_TMOBILE_Battery.NeedReplacement
+    ...                 Device.X_TMOBILE_Battery.ConnectStatus
     write               uci_restful -r /restful/battery/status GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_Battery.NeedReplacement
-    [Tags]              Device.X_TMOBILE_Battery.NeedReplacement
-    [Documentation]     Device.X_TMOBILE_Battery.NeedReplacement
-    write               uci_restful -r /restful/battery/status GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Battery.ChargingCurrent
-    [Tags]              Device.X_TMOBILE_Battery.ChargingCurrent
+uci_restful -r /restful/battery/output GET
+    [Tags]              Device.X_TMOBILE_Battery.ChargingCurrent    Device.X_TMOBILE_Battery.Temperature
+    ...                 Device.X_TMOBILE_Battery.Current            Device.X_TMOBILE_Battery.Voltage
+    ...                 Device.X_TMOBILE_Battery.Level              Device.X_TMOBILE_Battery.InCharging
     [Documentation]     Device.X_TMOBILE_Battery.ChargingCurrent
     write               uci_restful -r /restful/battery/output GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.X_TMOBILE_Battery.Temperature
-    [Tags]              Device.X_TMOBILE_Battery.Temperature
-    [Documentation]     Device.X_TMOBILE_Battery.Temperature
-    write               uci_restful -r /restful/battery/output GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Battery.Current
-    [Tags]              Device.X_TMOBILE_Battery.Current
-    [Documentation]     Device.X_TMOBILE_Battery.Current
-    write               uci_restful -r /restful/battery/output GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Battery.Voltage
-    [Tags]              Device.X_TMOBILE_Battery.Voltage
-    [Documentation]     Device.X_TMOBILE_Battery.Voltage
-    write               uci_restful -r /restful/battery/output GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Battery.Level
-    [Tags]              Device.X_TMOBILE_Battery.Level
-    [Documentation]     Device.X_TMOBILE_Battery.Level
-    write               uci_restful -r /restful/battery/output GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Battery.InCharging
-    [Tags]              Device.X_TMOBILE_Battery.InCharging
-    [Documentation]     Device.X_TMOBILE_Battery.InCharging
-    write               uci_restful -r /restful/battery/output GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.X_TMOBILE_Battery.ConnectStatus
-    [Tags]              Device.X_TMOBILE_Battery.ConnectStatus
-    [Documentation]     Device.X_TMOBILE_Battery.ConnectStatus
-    write               uci_restful -r /restful/battery/status GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.Hosts.Host.x.PhysAddress
-    [Tags]              Device.Hosts.Host.x.PhysAddress
-    [Documentation]     Device.Hosts.Host.x.PhysAddress
+uci_restful -r /restful/hosttable/info GET
+    [Tags]              Device.Hosts.Host.x.PhysAddress                 Device.Hosts.Host.x.IPAddress
+    ...                 Device.Hosts.Host.x.HostName                    Device.Hosts.Host.x.Active
+    ...                 Device.Hosts.Host.x.X_TMOBILE_DailyUsage_UL     Device.Hosts.Host.x.X_TMOBILE_DailyUsage_DL
+    #continued, 6 tags max
+    [Documentation]     Device.Hosts.Host.x.PhysAddress                 Device.Hosts.Host.x.IPAddress
+    ...                 Device.Hosts.Host.x.HostName                    Device.Hosts.Host.x.Active
+    ...                 Device.Hosts.Host.x.X_TMOBILE_DailyUsage_UL     Device.Hosts.Host.x.X_TMOBILE_DailyUsage_DL
     write               uci_restful -r /restful/hosttable/info GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.Hosts.Host.x.IPAddress
-    [Tags]              Device.Hosts.Host.x.IPAddress
-    [Documentation]     Device.Hosts.Host.x.IPAddress
+uci_restful -r /restful/hosttable/info GET (continued part 1)
+    [Tags]              Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_UL   Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_DL
+    ...                 Device.Hosts.Host.x.X_TMOBILE_connectionType    Device.Hosts.Host.x.X_TMOBILE_WiFi_SSID
+    ...                 Device.Hosts.Host.x.X_TMOBILE_WiFi_Security     Device.Hosts.Host.x.X_TMOBILE_WiFi_Version
+    #continued, 6 tags max
+    [Documentation]     Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_UL   Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_DL
+    ...                 Device.Hosts.Host.x.X_TMOBILE_connectionType    Device.Hosts.Host.x.X_TMOBILE_WiFi_SSID
+    ...                 Device.Hosts.Host.x.X_TMOBILE_WiFi_Security     Device.Hosts.Host.x.X_TMOBILE_WiFi_Version
     write               uci_restful -r /restful/hosttable/info GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.Hosts.Host.x.HostName
-    [Tags]              Device.Hosts.Host.x.HostName
-    [Documentation]     Device.Hosts.Host.x.HostName
+uci_restful -r /restful/hosttable/info GET (continued part 2)
+    [Tags]              Device.Hosts.Host.x.X_TMOBILE_WiFi_Encryption   Device.Hosts.Host.x.X_TMOBILE_Last_Connection_Error
+    ...                 Device.Hosts.HostNumberOfEntries
+    [Documentation]     Device.Hosts.Host.x.X_TMOBILE_WiFi_Encryption   Device.Hosts.Host.x.X_TMOBILE_Last_Connection_Error
+    ...                 Device.Hosts.HostNumberOfEntries
     write               uci_restful -r /restful/hosttable/info GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
-Device.Hosts.Host.x.Active
-    [Tags]              Device.Hosts.Host.x.Active
-    [Documentation]     Device.Hosts.Host.x.Active
-    write               uci_restful -r /restful/hosttable/info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.Hosts.Host.x.X_TMOBILE_DailyUsage_UL
-    [Tags]              Device.Hosts.Host.x.X_TMOBILE_DailyUsage_UL
-    [Documentation]     Device.Hosts.Host.x.X_TMOBILE_DailyUsage_UL
-    write               uci_restful -r /restful/hosttable/info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.Hosts.Host.x.X_TMOBILE_DailyUsage_DL
-    [Tags]              Device.Hosts.Host.x.X_TMOBILE_DailyUsage_DL
-    [Documentation]     Device.Hosts.Host.x.X_TMOBILE_DailyUsage_DL
-    write               uci_restful -r /restful/hosttable/info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_UL
-    [Tags]              Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_UL
-    [Documentation]     Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_UL
-    write               uci_restful -r /restful/hosttable/info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_DL
-    [Tags]              Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_DL
-    [Documentation]     Device.Hosts.Host.x.X_TMOBILE_MonthlyUsage_DL
-    write               uci_restful -r /restful/hosttable/info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.Hosts.Host.x.X_TMOBILE_connectionType
-    [Tags]              Device.Hosts.Host.x.X_TMOBILE_connectionType
-    [Documentation]     Device.Hosts.Host.x.X_TMOBILE_connectionType
-    write               uci_restful -r /restful/hosttable/info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.Hosts.Host.x.X_TMOBILE_WiFi_SSID
-    [Tags]              Device.Hosts.Host.x.X_TMOBILE_WiFi_SSID
-    [Documentation]     Device.Hosts.Host.x.X_TMOBILE_WiFi_SSID
-    write               uci_restful -r /restful/hosttable/info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.Hosts.Host.x.X_TMOBILE_WiFi_Security
-    [Tags]              Device.Hosts.Host.x.X_TMOBILE_WiFi_Security
-    [Documentation]     Device.Hosts.Host.x.X_TMOBILE_WiFi_Security
-    write               uci_restful -r /restful/hosttable/info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.Hosts.Host.x.X_TMOBILE_WiFi_Version
-    [Tags]              Device.Hosts.Host.x.X_TMOBILE_WiFi_Version
-    [Documentation]     Device.Hosts.Host.x.X_TMOBILE_WiFi_Versio
-    write               uci_restful -r /restful/hosttable/info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.Hosts.Host.x.X_TMOBILE_WiFi_Encryption
-    [Tags]              Device.Hosts.Host.x.X_TMOBILE_WiFi_Encryption
-    [Documentation]     Device.Hosts.Host.x.X_TMOBILE_WiFi_Encryption
-    write               uci_restful -r /restful/hosttable/info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.Hosts.Host.x.X_TMOBILE_Last_Connection_Error
-    [Tags]              Device.Hosts.Host.x.X_TMOBILE_Last_Connection_Error
-    [Documentation]     Device.Hosts.Host.x.X_TMOBILE_Last_Connection_Error
-    write               uci_restful -r /restful/hosttable/info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.Hosts.HostNumberOfEntries
-    [Tags]              Device.Hosts.HostNumberOfEntries
-    [Documentation]      Device.Hosts.HostNumberOfEntries
-    write               uci_restful -r /restful/hosttable/info GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found
-
-Device.MQTT.Client.{i}.Subscription.{i}.Topic
-    [Tags]                 Device.MQTT.Client.{i}.Subscription.{i}.Topic   MQTT
-    [Documentation]      Device.MQTT.Client.{i}.Subscription.{i}.Topic
+uci_restful -r /restful/mqttclient/client GET
+    [Tags]              MQTT                                                 Device.MQTT.Client.{i}.Subscription.{i}.Topic
+    ...                 Device.MQTT.Client.{i}.Subscription.{i}.QoS          Device.MQTT.Client.{i}.Subscription.{i}.Enable
+    ...                 Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Topic  Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Reference
+    #continued, 6 tags max
+    [Documentation]     MQTT                                                 Device.MQTT.Client.{i}.Subscription.{i}.Topic
+    ...                 Device.MQTT.Client.{i}.Subscription.{i}.QoS          Device.MQTT.Client.{i}.Subscription.{i}.Enable
+    ...                 Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Topic  Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Reference
     write                uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
-Device.MQTT.Client.{i}.Subscription.{i}.QoS
-    [Tags]              Device.MQTT.Client.{i}.Subscription.{i}.QoS   MQTT
-    [Documentation]      Device.MQTT.Client.{i}.Subscription.{i}.QoS
-    write               uci_restful -r /restful/mqttclient/client GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found   "no content"
-    #should not contain  ${output}   no content
-
-Device.MQTT.Client.{i}.Subscription.{i}.Enable
-    [Tags]              Device.MQTT.Client.{i}.Subscription.{i}.Enable   MQTT
-    [Documentation]      Device.MQTT.Client.{i}.Subscription.{i}.Enable
+uci_restful -r /restful/mqttclient/client GET (continued part 1)
+    [Tags]              MQTT                                    Device.MQTT.Client.{i}.Username
+    ...                 Device.MQTT.Client.{i}.Password         Device.MQTT.Client.{i}.ClientID
+    ...                 Device.MQTT.Client.{i}.BrokerAddress    Device.MQTT.Client.{i}.BrokerPort
+    #continued, 6 tags max
+    [Documentation]     MQTT                                    Device.MQTT.Client.{i}.Username
+    ...                 Device.MQTT.Client.{i}.Password         Device.MQTT.Client.{i}.ClientID
+    ...                 Device.MQTT.Client.{i}.BrokerAddress    Device.MQTT.Client.{i}.BrokerPort
     write               uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
-Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Topic
-    [Tags]              Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Topic   MQTT
-    [Documentation]      Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Topic
-    write                 uci_restful -r /restful/mqttclient/client GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found  "no content"
-    #should not contain  ${output}   no content
-
-Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Reference
-    [Tags]              Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Reference   MQTT
-    [Documentation]      Device.LocalAgent.Controller.{i}.MTP.{i}.MQTT.Reference
+uci_restful -r /restful/mqttclient/client GET (continued part 2)
+    [Tags]              MQTT                                    Device.MQTT.Client.{i}.Enable
+    [Documentation]     Device.MQTT.Client.{i}.Enable
     write               uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found  "no content"
     #should not contain  ${output}   no content
 
-Device.MQTT.Client.{i}.Username
-    [Tags]                  Device.MQTT.Client.{i}.Username   MQTT
-    [Documentation]          Device.MQTT.Client.{i}.Username
-    write                   uci_restful -r /restful/mqttclient/client GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found  "no content"
-    #should not contain  ${output}   no content
-
-Device.MQTT.Client.{i}.Password
-    [Tags]                  Device.MQTT.Client.{i}.Password   MQTT
-    [Documentation]          Device.MQTT.Client.{i}.Password
-    write                   uci_restful -r /restful/mqttclient/client GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found  "no content"
-    #should not contain  ${output}   no content
-
-Device.MQTT.Client.{i}.ClientID
-    [Tags]                  Device.MQTT.Client.{i}.ClientID   MQTT
-    [Documentation]          Device.MQTT.Client.{i}.ClientID
-    write                   uci_restful -r /restful/mqttclient/client GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found  "no content"
-    #should not contain  ${output}   no content
-
-Device.MQTT.Client.{i}.BrokerAddress
-    [Tags]                  Device.MQTT.Client.{i}.BrokerAddress   MQTT
-    [Documentation]          Device.MQTT.Client.{i}.BrokerAddress
-    write                   uci_restful -r /restful/mqttclient/client GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found  "no content"
-    #should not contain  ${output}   no content
-
-Device.MQTT.Client.{i}.BrokerPort
-    [Tags]                  Device.MQTT.Client.{i}.BrokerPort   MQTT
-    [Documentation]          Device.MQTT.Client.{i}.BrokerPort
-    write                   uci_restful -r /restful/mqttclient/client GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found  "no content"
-    #should not contain  ${output}   no content
-
-Device.MQTT.Client.{i}.Enable
-    [Tags]                  Device.MQTT.Client.{i}.Enable   MQTT
-    [Documentation]          Device.MQTT.Client.{i}.Enable
-    write                   uci_restful -r /restful/mqttclient/client GET
-    Set client configuration  prompt=#
-    ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found  "no content"
-    #should not contain  ${output}   no content
-
-Device.WiFi.xxx.SSID
+uci_restful -r /restful/wifiap/ssid GET
     [Tags]                  Device.WiFi.xxx.SSID
     [Documentation]          Device.WiFi.xxx.SSID
     write                   uci_restful -r /restful/wifiap/ssid GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt
+    ${output}=              Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
     #should not contain  ${output}   no content
 
-Device.WiFi.xxx.Security
+uci_restful -r /restful/wifiap/security GET
     [Tags]                  Device.WiFi.xxx.Security
     [Documentation]          Device.WiFi.xxx.Security
     write                   uci_restful -r /restful/wifiap/security GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt
+    ${output}=              Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
     #should not contain  ${output}   no content
 
-Device.WiFi.xxx.Version
+uci_restful -r /restful/wifiap/version GET
     [Tags]                  Device.WiFi.xxx.Version
     [Documentation]          Device.WiFi.xxx.Version
     write                   uci_restful -r /restful/wifiap/version GET
     Set client configuration  prompt=#
-    ${output}=         Read Until prompt
+    ${output}=                 Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
     #should not contain  ${output}   no content
 
-Device.WiFi.xxx.Encryption
+uci_restful -r /restful/wifiap/encryption GET
     [Tags]                  Device.WiFi.xxx.Encryption
     [Documentation]          Device.WiFi.xxx.Encryption
-    write   uci_restful -r /restful/wifiap/encryption GET
+    write                   uci_restful -r /restful/wifiap/encryption GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
     #should not contain  ${output}   no content
 
-Update LTE Cellular Interval Info
+#Update LTE Cellular Interval Info
+uci_restful -r /restful/lte/cellular_info_update_interval GET
     [Tags]                  cellular_info_update_interval
     [Documentation]          cellular_info_update_interval
     write                   uci_restful -r /restful/lte/cellular_info_update_interval GET
@@ -758,9 +325,6 @@ uci template
     ${output}=         Read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
     should not contain  ${output}   no content
-
-
-
 
 *** Keywords ***
 Open Connection And Log In
