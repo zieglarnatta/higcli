@@ -309,6 +309,15 @@ uci_restful -r /restful/lte/cellular_info_update_interval GET
     #only activate this below to update the update interval
     #write                   uci_restful -r /restful/lte/cellular_info_update_interval PUT "{\"second\":\"1\"}"
 
+#Get HOID. NOTE: this needs to be set from ACS and pushed to HIG before you can run this query.
+#Also, potentially this command needs to be edited for proper UCI Restful, it should be .HOID and not _HOID defect OLB-743
+uci get trconf.Device_ManagementServer.X_TMOBILE_HOID
+    [Tags]                  trconf.Device_ManagementServer.X_TMOBILE_HOID   trconf.Device_ManagementServer.X_TMOBILE.HOID    HOID
+    [Documentation]         trconf.Device_ManagementServer.X_TMOBILE_HOID   trconf.Device_ManagementServer.X_TMOBILE.HOID
+    ${output}=              write                   uci get trconf.Device_ManagementServer.X_TMOBILE_HOID
+    #${output}=              write                   uci get trconf.Device_ManagementServer.X_TMOBILE.HOID
+    should not contain      ${output}               {"Status":"fail","ModuleCommand":"unknow","Result":"Command format error"}      uci: Entry not found    uci: Parse error
+
 uci template
     [Tags]  uci
     [Documentation]  uci
