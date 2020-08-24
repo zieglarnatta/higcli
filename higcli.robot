@@ -35,6 +35,18 @@ uci_restful -r /restful/tr069/dev_info GET
     ${output}=         read Until prompt
     should not contain  ${output}   fail    uci_restful: not found
 
+#Get HOID. NOTE: this needs to be set from ACS and pushed to HIG before you can run this query.
+#Also, potentially this command needs to be edited for proper UCI Restful, it should be .HOID and not _HOID defect OLB-743
+#old / temp: uci get trconf.Device_ManagementServer.X_TMOBILE_HOID
+uci_restful -r /restful/tr069/dev_info GET for HOID (continued)
+    [Tags]                  trconf.Device_ManagementServer.X_TMOBILE_HOID   trconf.Device_ManagementServer.X_TMOBILE.HOID    HOID
+    [Documentation]         trconf.Device_ManagementServer.X_TMOBILE_HOID   trconf.Device_ManagementServer.X_TMOBILE.HOID
+    ${output}=              write                   uci_restful -r /restful/tr069/dev_info GET
+    #${output}=              write                   uci get trconf.Device_ManagementServer.X_TMOBILE.HOID
+    Set client configuration  prompt=#
+    ${output}=              Read Until prompt
+    should not contain      ${output}               fail    {"Status":"fail","ModuleCommand":"unknow","Result":"Command format error"}      uci: Entry not found    uci: Parse error
+
 uci_restful -r /restful/geoip/globalIP GET
     [Tags]              Device.DeviceInfo.X_TMOBILE_GlobalIPAddress
     [Documentation]     Device.DeviceInfo.X_TMOBILE_GlobalIPAddress
@@ -308,15 +320,6 @@ uci_restful -r /restful/lte/cellular_info_update_interval GET
     write                   uci_restful -r /restful/lte/cellular_info_update_interval GET
     #only activate this below to update the update interval
     #write                   uci_restful -r /restful/lte/cellular_info_update_interval PUT "{\"second\":\"1\"}"
-
-#Get HOID. NOTE: this needs to be set from ACS and pushed to HIG before you can run this query.
-#Also, potentially this command needs to be edited for proper UCI Restful, it should be .HOID and not _HOID defect OLB-743
-uci get trconf.Device_ManagementServer.X_TMOBILE_HOID
-    [Tags]                  trconf.Device_ManagementServer.X_TMOBILE_HOID   trconf.Device_ManagementServer.X_TMOBILE.HOID    HOID
-    [Documentation]         trconf.Device_ManagementServer.X_TMOBILE_HOID   trconf.Device_ManagementServer.X_TMOBILE.HOID
-    ${output}=              write                   uci get trconf.Device_ManagementServer.X_TMOBILE_HOID
-    #${output}=              write                   uci get trconf.Device_ManagementServer.X_TMOBILE.HOID
-    should not contain      ${output}               {"Status":"fail","ModuleCommand":"unknow","Result":"Command format error"}      uci: Entry not found    uci: Parse error
 
 uci template
     [Tags]  uci
