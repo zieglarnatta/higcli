@@ -251,8 +251,8 @@ uci_restful -r /restful/mqttclient/client GET
     write                uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found  "no content"
-    #should not contain  ${output}   no content
+    should not contain  ${output}   fail    uci_restful: not found      "no content"
+    should not contain  ${output}   no content
 
 uci_restful -r /restful/mqttclient/client GET (continued part 1)
     [Tags]              MQTT                                    Device.MQTT.Client.{i}.Username
@@ -265,8 +265,8 @@ uci_restful -r /restful/mqttclient/client GET (continued part 1)
     write               uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found  "no content"
-    #should not contain  ${output}   no content
+    should not contain  ${output}   fail    uci_restful: not found   "no content"
+    should not contain  ${output}   no content
 
 uci_restful -r /restful/mqttclient/client GET (continued part 2)
     [Tags]              MQTT                                    Device.MQTT.Client.{i}.Enable
@@ -274,8 +274,8 @@ uci_restful -r /restful/mqttclient/client GET (continued part 2)
     write               uci_restful -r /restful/mqttclient/client GET
     Set client configuration  prompt=#
     ${output}=         Read Until prompt
-    should not contain  ${output}   fail    uci_restful: not found  "no content"
-    #should not contain  ${output}   no content
+    should not contain  ${output}   fail    uci_restful: not found      "no content"
+    should not contain  ${output}   no content
 
 uci_restful -r /restful/wifiap/ssid GET
     [Tags]                  Device.WiFi.xxx.SSID
