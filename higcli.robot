@@ -1,5 +1,7 @@
 *** Settings ***
-Documentation          HIG MQTT CLi connection & tests
+Documentation          Author: Roy Yap
+...                    Date: May 10 2020
+...                    HIG MQTT CLi connection & tests
 ...                    and getting its output.
 ...
 ...                    Notice how connections are handled as part of the suite setup and
