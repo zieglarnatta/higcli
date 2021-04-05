@@ -10,7 +10,8 @@ Documentation          Author: Roy Yap
 Library                SSHLibrary
 Suite Setup            Open Connection And Log In
 Suite Teardown         Close All Connections
-Resource                resource.robot
+#Resource                resource.robot
+Resource                local.robot
 
 *** Test Cases ***
 Hello World
